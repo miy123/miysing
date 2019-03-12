@@ -1,0 +1,10 @@
+<div *ngIf="song">
+  <h2>{{song.name}} Details</h2>
+  <div *ngFor="let songRecord of song.songRecords">
+    <div><span>id: </span>{{songRecord.id}}</div>
+    <div><span>歌名: </span>{{songRecord.name}}</div>
+    <div><span>時間: </span>{{songRecord.time}}</div>
+    <div><span>聽眾: </span>{{songRecord.listener}}</div>
+    <div><span>音檔: </span>{{songRecord.songUrl}}</div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<h1>Songs List</h1>
+
+<p *ngIf="!songs"><em>Loading...</em></p>
+<table class="table table-dark table-hover" *ngIf="songs">
+  <thead>
+    <tr>
+      <th class="col-xs-6 col-md-2"></th>
+      <th class="col-xs-6 col-md-2"><input class="form-control" [(ngModel)]="searchParameter.name" /></th>
+      <th class="col-xs-6 col-md-2"><input class="form-control" [(ngModel)]="searchParameter.descrption" /></th>
+      <th class="col-xs-6 col-md-2"></th>
+    </tr>
+    <tr>
+      <th class="col-xs-6 col-md-2">id</th>
+      <th class="col-xs-6 col-md-4">歌名</th>
+      <th class="col-xs-6 col-md-4">描述</th>
+      <th class="col-xs-6 col-md-2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let song of displaySongs" (click)="onSelect(song)" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <td>{{song.id}}</td>
+      <td>{{song.name}}</td>
+      <td>{{song.descrption}}</td>
+      <td>
+        <button class="btn btn-warning">編輯</button>
+        <button class="btn btn-danger">刪除</button>
+      </td>
+      <div class="collapse row" id="collapseExample">
+        <div class="well">
+          ...
+        </div>
+      </div>
+    </tr>
+  </tbody>
+</table>
+
+<!--<app-song-detail [song] ="selectedSong"></app-song-detail>-->

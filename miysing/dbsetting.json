@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "DBConnection": "Data Source=(local);Initial Catalog=MiySing;Integrated Security=True"
+  }
+}
