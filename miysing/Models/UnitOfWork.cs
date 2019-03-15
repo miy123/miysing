@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eip.Models
+namespace miysing.Models
 {
     public class UnitOfWork : IUnitOfWork
     {

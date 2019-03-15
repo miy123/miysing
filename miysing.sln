@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miysing", "miysing\miysing.csproj", "{4152D600-CD74-467A-8802-258D2E347D41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miysing", "miysing\miysing.csproj", "{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4152D600-CD74-467A-8802-258D2E347D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4152D600-CD74-467A-8802-258D2E347D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4152D600-CD74-467A-8802-258D2E347D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4152D600-CD74-467A-8802-258D2E347D41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {78E7947C-E450-488E-8A43-5404065AACAB}
+		SolutionGuid = {C2ED60D1-9452-4372-B0D1-ADAB3C137AF5}
 	EndGlobalSection
 EndGlobal
