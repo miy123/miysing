@@ -20,5 +20,23 @@ namespace miysing.Controllers
         {
             return Db.Song.GetAllList();
         }
+
+        [HttpPost("[action]")]
+        public IActionResult Create([FromBody]Song song)
+        {
+            return Json(Db.Song.Add(song));
+        }
+
+        [HttpPut("[action]")]
+        public IActionResult Update([FromBody]Song song)
+        {
+            return Json(Db.Song.Update(song));
+        }
+
+        [HttpDelete("[action]/{id}")]
+        public IActionResult Delete(int id)
+        {
+            return Json(Db.Song.Remove(Db.Song.Get(id)));
+        }
     }
 }

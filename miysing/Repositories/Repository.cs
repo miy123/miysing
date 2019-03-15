@@ -54,7 +54,10 @@ namespace eip.Models.Repositories
 
             _entities.Add(entity);
             if (SaveChangeLogs().Success)
+            {
                 result.Message = "新增成功";
+                result.Success = true;
+            }
             else
                 result.Message = "新增失敗";
             return result;
@@ -68,7 +71,10 @@ namespace eip.Models.Repositories
 
             _entities.AddRange(entities);
             if (SaveChangeLogs().Success)
+            {
                 result.Message = "新增成功";
+                result.Success = true;
+            }
             else
                 result.Message = "新增失敗";
             return result;
@@ -82,7 +88,10 @@ namespace eip.Models.Repositories
 
             _entities.Remove(entity);
             if (SaveChangeLogs().Success)
+            {
                 result.Message = "刪除成功";
+                result.Success = true;
+            }
             else
                 result.Message = "刪除失敗";
             return result;
@@ -96,7 +105,10 @@ namespace eip.Models.Repositories
 
             _entities.RemoveRange(entities);
             if (SaveChangeLogs().Success)
+            {
                 result.Message = "刪除成功";
+                result.Success = true;
+            }
             else
                 result.Message = "刪除失敗";
             return result;
@@ -110,7 +122,10 @@ namespace eip.Models.Repositories
 
             Context.Entry(entities).State = EntityState.Modified;
             if (SaveChangeLogs().Success)
+            {
                 result.Message = "編輯成功";
+                result.Success = true;
+            }
             else
                 result.Message = "編輯失敗";
             return result;
