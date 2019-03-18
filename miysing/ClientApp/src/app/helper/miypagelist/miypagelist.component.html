@@ -1,0 +1,25 @@
+<nav aria-label="...">
+  <ul class="pagination d-flex justify-content-center">
+    <li class="page-item" [ngClass]="{'disabled' : currentPage == 1}">
+      <a class="page-link" (click)="previous()" href="javascript:void(0)" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item" *ngIf="minPage>(1)">
+      <a class="page-link" href="javascript:void(0)"
+         (click)="search(1)">1</a>
+    </li>
+    <li (click)="mutiPrevious()" class="page-item" *ngIf="minPage>(1)">
+      <a class="page-link" href="javascript:void(0)">..</a>
+    </li>
+    <li *ngFor="let size of pageSizeArray" (click)="search(size)" class="page-item" [ngClass]="{'active': size == currentPage}"><a class="page-link" href="javascript:void(0)">{{size}}</a></li>
+    <li class="page-item" (click)="mutiNext()" *ngIf="maxPage<pageSize">
+      <a class="page-link" href="javascript:void(0)">..</a>
+    </li>
+    <li class="page-item" *ngIf="maxPage<pageSize">
+      <a class="page-link" href="javascript:void(0)" [ngClass]="{'active': size == currentPage}"
+         (click)="search(pageSize)">{{pageSize}}</a>
+    </li>
+    <li class="page-item" [ngClass]="{'disabled' : currentPage == pageSize }">
+      <a class="page-link" (click)="next()" href="javascript:void(0)">Next</a>
+    </li>
+  </ul>
+</nav>

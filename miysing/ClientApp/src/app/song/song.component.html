@@ -34,7 +34,7 @@
     </tr>
   </tbody>
 </table>
-
+<app-miypagelist *ngIf="filterSongs" [allData]="filterSongs" (displayData) ="putDisplaySongs($event)"></app-miypagelist>
 <div class="modal fade" id="newSong" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -63,4 +63,4 @@
     </div>
   </div>
 </div>
-<!--<app-song-detail [song] ="selectedSong"></app-song-detail>-->
+<app-song-detail [song]="selectedSong"></app-song-detail>

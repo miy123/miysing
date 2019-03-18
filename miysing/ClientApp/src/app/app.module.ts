@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { SongComponent } from './song/song.component';
+import { SongDetailComponent } from './song/song-detail/song-detail.component';
+import { MiypagelistComponent } from './helper/miypagelist/miypagelist.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SongComponent } from './song/song.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    SongComponent
+    SongComponent,
+    SongDetailComponent,
+    MiypagelistComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
