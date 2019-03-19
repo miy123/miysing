@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-miypagelist',
@@ -53,6 +53,11 @@ export class MiypagelistComponent {
     this.search(this.currentPage - changePage);
   }
 
+  resetPage(): void {
+    this.minPage = 1;
+    this.currentPage = 1;
+  }
+  
   search(page: number): void {
     this.currentPage = page;
     const n = 2;
@@ -63,10 +68,28 @@ export class MiypagelistComponent {
     this.getDisplayData();
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
     let vm = this;
     setTimeout(() => {
-      vm.getDisplayData();
-    }, 500);
+      if (changes.allData && (!changes.allData.previousValue || !vm.isObjEqual(changes.allData.currentValue, changes.allData.previousValue))) {
+        vm.resetPage();
+        vm.getDisplayData();
+      }
+    }, 0);
+  }
+
+  isObjEqual(o1, o2): boolean {
+    var props1 = Object.getOwnPropertyNames(o1);
+    var props2 = Object.getOwnPropertyNames(o2);
+    if (props1.length != props2.length) {
+      return false;
+    }
+    for (var i = 0, max = props1.length; i < max; i++) {
+      var propName = props1[i];
+      if (o1[propName] !== o2[propName]) {
+        return false;
+      }
+    }
+    return true;
   }
 }

@@ -5,8 +5,8 @@
   <thead>
     <tr>
       <th class="col-xs-6 col-md-2"><button data-toggle="modal" data-target="#newSong" class="btn btn-info">+</button></th>
-      <th class="col-xs-6 col-md-2"><input class="form-control" [(ngModel)]="searchParameter.name" /></th>
-      <th class="col-xs-6 col-md-2"><input class="form-control" [(ngModel)]="searchParameter.descrption" /></th>
+      <th class="col-xs-6 col-md-2"><input class="form-control" [(ngModel)]="searchParameter" /></th>
+      <th class="col-xs-6 col-md-2"></th>
       <th class="col-xs-6 col-md-2"></th>
     </tr>
     <tr>
@@ -17,8 +17,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let song of displaySongs" (click)="onSelect(song)" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      <td>{{song.id}}</td>
+    <tr *ngFor="let song of displaySongs">
+      <td (click)="onSelect(song)" data-toggle="modal" data-target="#songDetail">{{song.id}}</td>
       <td><p *ngIf="!song.editable">{{song.name}}</p><input *ngIf="song.editable" type="text" [(ngModel)]="song.name" class="form-control" /></td>
       <td><p *ngIf="!song.editable">{{song.descrption}}</p><input *ngIf="song.editable" type="text" [(ngModel)]="song.descrption" class="form-control" /></td>
       <td>

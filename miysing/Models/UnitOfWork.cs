@@ -1,11 +1,5 @@
-﻿using eip.Models.Repositories;
-using miysing.Models;
+﻿using miysing.Repositories;
 using miysing.Repositories.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace miysing.Models
 {
@@ -14,7 +8,8 @@ namespace miysing.Models
         private readonly MiySongDbContext _context;
 
         public ISongRepository Song { get; private set; }
-        
+        public ISongRecordRepository SongRecord { get; private set; }
+
         public int Complete()
         {
             return _context.SaveChanges();
@@ -29,6 +24,7 @@ namespace miysing.Models
         {
             _context = context;
             Song = new SongRepository(_context);
+            SongRecord = new SongRecordRepository(_context);
         }
     }
 }

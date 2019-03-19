@@ -14,16 +14,11 @@ export class SongComponent implements OnInit {
 
   newSong: Song = new Song();
   displaySongs: Song[];
-  searchParameter: any = {
-    id: 0,
-    name: '',
-    descrption: ''
-  };
+  searchParameter: string = '';
 
   get filterSongs(): Song[] {
     let result = this.songs;
-    if (this.searchParameter.name) result = result.filter(x => x.name.includes(this.searchParameter.name));
-    if (this.searchParameter.descrption) result = result.filter(x => x.descrption.includes(this.searchParameter.descrption));
+    if (this.searchParameter) result = result.filter(x => x.name.includes(this.searchParameter) || x.descrption.includes(this.searchParameter) || x.songRecords.some(y => y.listener.includes(this.searchParameter)));
     return result;
   }
 
@@ -62,6 +57,7 @@ export class SongComponent implements OnInit {
 
   putDisplaySongs(data: Song[]) {
     this.displaySongs = data;
+    this.selectedSong = null;
   }
 
   constructor(http: HttpClient) {

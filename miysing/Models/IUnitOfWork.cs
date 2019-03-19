@@ -11,7 +11,7 @@ namespace miysing.Models
     public interface IUnitOfWork : IDisposable
     {
         ISongRepository Song { get;}
-
+        ISongRecordRepository SongRecord { get; }
         int Complete();
     }
 }

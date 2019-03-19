@@ -1,5 +1,4 @@
-﻿using eip.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using miysing.Models;
 using System;
 using System.Collections.Generic;

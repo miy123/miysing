@@ -2,7 +2,7 @@ export class Song {
   id: number
   name: string
   descrption: string
-  songRecord: SongRecord[]
+  songRecords: SongRecord[]
   editable: boolean = false
 }
 
