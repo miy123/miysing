@@ -12,4 +12,5 @@ export class SongRecord {
   time: string
   listener: string
   songUrl: string
+  editable: boolean = false
 }

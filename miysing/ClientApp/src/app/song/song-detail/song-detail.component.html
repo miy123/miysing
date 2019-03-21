@@ -35,17 +35,17 @@
             </tr>
             <tr *ngFor="let songRecord of song.songRecords">
               <td>{{songRecord.id}}</td>
-              <td>{{songRecord.time | date:'yyyy/MM/dd'}}</td>
-              <td>{{songRecord.listener}}</td>
-              <td>{{songRecord.songUrl}}</td>
+              <td><p *ngIf="!songRecord.editable">{{songRecord.time | date:'yyyy/MM/dd'}}</p><input *ngIf="songRecord.editable" type="text" [(ngModel)]="songRecord.time" class="form-control" /></td>
+              <td><p *ngIf="!songRecord.editable">{{songRecord.listener}}</p><input *ngIf="songRecord.editable" type="text" [(ngModel)]="songRecord.listener" class="form-control" /></td>
+              <td><p *ngIf="!songRecord.editable">{{songRecord.songUrl }}</p><input *ngIf="songRecord.editable" type="text" [(ngModel)]="songRecord.songUrl" class="form-control" /></td>
               <td>
-                <div *ngIf="!song.editable; else editableButton">
-                  <button (click)="song.editable = true" class="btn btn-sm btn-warning">編輯</button>
-                  <button (click)="delete(song)" class="btn btn-sm btn-danger">刪除</button>
+                <div *ngIf="!songRecord.editable; else editableButton">
+                  <button (click)="songRecord.editable = true" class="btn btn-sm btn-warning">編輯</button>
+                  <button (click)="delete(songRecord)" class="btn btn-sm btn-danger">刪除</button>
                 </div>
                 <ng-template #editableButton>
-                  <button (click)="save(song)" class="btn btn-sm btn-success">儲存</button>
-                  <button (click)="song.editable = false" class="btn btn-sm btn-danger">取消</button>
+                  <button (click)="update(songRecord)" class="btn btn-sm btn-success">儲存</button>
+                  <button (click)="songRecord.editable = false" class="btn btn-sm btn-danger">取消</button>
                 </ng-template>
               </td>
             </tr>

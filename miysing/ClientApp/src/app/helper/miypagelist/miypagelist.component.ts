@@ -12,10 +12,13 @@ export class MiypagelistComponent {
   maxItemOnePage: number = 5;
   currentPage: number = 1;
   minPage: number = 1;
-  get pageSize(): number {
+  pageSize: number;
+  option: Option = new Option();
+
+  setPageSize(): void {
     let result = this.allData.length / this.maxItemOnePage;
     result = Number.isInteger(result) ? result : (result + 1);
-    return parseInt(result.toString());
+    this.pageSize = parseInt(result.toString());
   }
   get pageSizeArray(): number[] {
     //return Array.from({ length: this.maxPage }, (v, k) => k + 1);
@@ -29,9 +32,15 @@ export class MiypagelistComponent {
     if (this.minPage + this.maxPageButtonSize - 1 > this.pageSize) return this.pageSize;
     else return this.minPage + this.maxPageButtonSize - 1;
   }
+  setComputedProperty(): void {
+    this.setPageSize();
+  }
+  get outputData(): any[] {
+    return this.allData.slice((this.currentPage - 1) * this.maxItemOnePage, this.currentPage * this.maxItemOnePage);
+  }
 
   getDisplayData(): void {
-    this.displayData.emit(this.allData.slice((this.currentPage - 1) * this.maxItemOnePage, this.currentPage * this.maxItemOnePage));
+    this.displayData.emit(this.outputData);
   }
 
   next(): void {
@@ -57,22 +66,27 @@ export class MiypagelistComponent {
     this.minPage = 1;
     this.currentPage = 1;
   }
-  
   search(page: number): void {
     this.currentPage = page;
     const n = 2;
     if (this.currentPage > n) this.minPage = this.currentPage - n;
     else this.minPage = 1;
     if (this.currentPage == 1) this.minPage = 1;
-    if (this.currentPage == this.pageSize) this.minPage = this.pageSize - this.maxPageButtonSize + 1;
+    if (this.currentPage == this.pageSize) this.minPage = this.pageSize - this.maxPageButtonSize + 1 > 0 ? this.minPage = this.pageSize - this.maxPageButtonSize + 1 : 1;
     this.getDisplayData();
   }
 
+  maxItemChanged() {
+    if (this.maxItemOnePage < 1) this.maxItemOnePage = 1;
+    this.setPageSize();
+    this.getDisplayData();
+  }
   ngOnChanges(changes: SimpleChanges) {
     let vm = this;
     setTimeout(() => {
       if (changes.allData && (!changes.allData.previousValue || !vm.isObjEqual(changes.allData.currentValue, changes.allData.previousValue))) {
         vm.resetPage();
+        vm.setComputedProperty();
         vm.getDisplayData();
       }
     }, 0);
@@ -92,4 +106,12 @@ export class MiypagelistComponent {
     }
     return true;
   }
+
+  setOption(option: Option) {
+    this.option = option;
+  }
+}
+
+class Option {
+  itemSize: boolean = true
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Song, SongRecord } from '../model/song';
 import { Result } from '../model/Result';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-song',
@@ -11,6 +12,7 @@ export class SongComponent implements OnInit {
   songs: Song[];
   selectedSong: Song;
   http: HttpClient;
+  createForm: FormGroup;
 
   newSong: Song = new Song();
   displaySongs: Song[];
@@ -22,6 +24,11 @@ export class SongComponent implements OnInit {
     return result;
   }
 
+  submitForm(form: Song): void {
+    console.log('Form Data: ');
+    console.log(form.descrption);
+    console.log(form.name);
+  }
   //crud
   getData(): void {
     this.http.get<Song[]>('/api/Song/GetSongsList').subscribe(result => {
@@ -66,5 +73,12 @@ export class SongComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createForm = new FormGroup({
+      'name': new FormControl(this.newSong.name, [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      'descrption': new FormControl(this.newSong.descrption, Validators.required)
+    });
   }
 }
