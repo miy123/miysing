@@ -9,12 +9,12 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   templateUrl: './song.component.html'
 })
 export class SongComponent implements OnInit {
+  ngOnInit(): void {
+  }
   songs: Song[];
   selectedSong: Song;
-  http: HttpClient;
   createForm: FormGroup;
 
-  newSong: Song = new Song();
   displaySongs: Song[];
   searchParameter: string = '';
 
@@ -24,10 +24,9 @@ export class SongComponent implements OnInit {
     return result;
   }
 
-  submitForm(form: Song): void {
-    console.log('Form Data: ');
-    console.log(form.descrption);
-    console.log(form.name);
+  onSubmit(): void {
+    console.log(this.createForm);
+    if (this.createForm.valid === true) this.create(this.createForm.value);
   }
   //crud
   getData(): void {
@@ -35,19 +34,20 @@ export class SongComponent implements OnInit {
       this.songs = result;
     }, error => console.error(error));
   }
-  create(): void {
-    this.http.post<Result>('/api/Song/Create', this.newSong).subscribe(result => {
+  create(newSong: Song): void {
+    this.http.post<Result>('/api/Song/Create', newSong).subscribe(result => {
       alert(result.message);
-      this.newSong = new Song();
       this.getData();
-      document.getElementById('closeModal').click();
+      this.close();
     }, error => console.error(error));
   }
   save(song: Song): void {
-    this.http.put<Result>('/api/Song/Update', song).subscribe(result => {
-      alert(result.message);
-      song.editable = !result.success;
-    }, error => console.error(error));
+    if (song.name && song.descrption) {
+      this.http.put<Result>('/api/Song/Update', song).subscribe(result => {
+        alert(result.message);
+        song.editable = !result.success;
+      }, error => console.error(error));
+    } else alert('請輸入必填項.');
   }
   delete(song: Song): void {
     if (confirm('是否刪除？')) {
@@ -57,7 +57,12 @@ export class SongComponent implements OnInit {
       }, error => console.error(error));
     }
   }
-  
+
+  close() {
+    document.getElementById('closeModal').click();
+    this.createForm.reset();
+  }
+
   onSelect(song: Song): void {
     this.selectedSong = song;
   }
@@ -67,18 +72,18 @@ export class SongComponent implements OnInit {
     this.selectedSong = null;
   }
 
-  constructor(http: HttpClient) {
-    this.http = http;
-    this.getData();
+  buildForm() {
+    this.createForm = this.fb.group({
+      name: new FormControl('', [
+        Validators.required,
+        //Validators.minLength(4)
+      ]),
+      descrption: new FormControl('', Validators.required)
+    });
   }
 
-  ngOnInit() {
-    this.createForm = new FormGroup({
-      'name': new FormControl(this.newSong.name, [
-        Validators.required,
-        Validators.minLength(4)
-      ]),
-      'descrption': new FormControl(this.newSong.descrption, Validators.required)
-    });
+  constructor(private http: HttpClient, private fb: FormBuilder) {
+    this.buildForm();
+    this.getData();
   }
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace miysing.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : BaseController
+    public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
         {

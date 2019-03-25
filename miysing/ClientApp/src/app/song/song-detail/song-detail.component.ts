@@ -23,6 +23,7 @@ export class SongDetailComponent implements OnInit {
     this.createRaw.splice(index, 1);
   }
   saveRaw(): void {
+    this.createRaw = this.createRaw.filter(x => x.time && x.listener);
     this.http.post<Result>('/api/SongRecord/Create', this.createRaw).subscribe(result => {
       alert(result.message);
       if (result.success) {
@@ -38,11 +39,13 @@ export class SongDetailComponent implements OnInit {
     }, error => console.error(error));
   }
   update(songRecord: SongRecord): void {
-    this.http.put<Result>('/api/SongRecord/Update', songRecord).subscribe(result => {
-      alert(result.message);
-      songRecord.editable = !result.success;
-      if (result.success) this.getRecord();
-    }, error => console.error(error));
+    if (songRecord.time && songRecord.listener) {
+      this.http.put<Result>('/api/SongRecord/Update', songRecord).subscribe(result => {
+        alert(result.message);
+        songRecord.editable = !result.success;
+        if (result.success) this.getRecord();
+      }, error => console.error(error));
+    } else alert('請輸入必填項.');
   }
   delete(songRecord: SongRecord): void {
     if (confirm('是否刪除？')) {
