@@ -81,6 +81,7 @@ export class MiypagelistComponent {
     this.setPageSize();
     this.getDisplayData();
   }
+
   ngOnChanges(changes: SimpleChanges) {
     let vm = this;
     setTimeout(() => {

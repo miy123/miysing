@@ -10,6 +10,10 @@ namespace miysing.Controllers
     [Route("api/[controller]")]
     public class SongRecordController : BaseController
     {
+        public SongRecordController(MiySongDbContext context) : base(context)
+        {
+        }
+
         [HttpGet("[action]/{id}")]
         public IActionResult GetSongRecordBySongId(int id)
         {

@@ -10,9 +10,9 @@ namespace miysing.Controllers
 {
     public class BaseController : Controller
     {
-        public BaseController()
+        public BaseController(MiySongDbContext dbContext)
         {
-            Db = new UnitOfWork(new MiySongDbContext());
+            Db = new UnitOfWork(dbContext);
         }
         public IUnitOfWork Db;
     }

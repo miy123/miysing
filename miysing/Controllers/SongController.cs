@@ -10,6 +10,10 @@ namespace miysing.Controllers
     [Route("api/[controller]")]
     public class SongController : BaseController
     {
+        public SongController(MiySongDbContext context) : base(context)
+        {
+        }
+
         public IActionResult Index()
         {
             return View();

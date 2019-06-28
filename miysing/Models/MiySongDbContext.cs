@@ -7,30 +7,21 @@ namespace miysing.Models
 {
     public class MiySongDbContext : DbContext
     {
-        public MiySongDbContext(DbContextOptions<MiySongDbContext> options)
-            : base(options)
+        public MiySongDbContext(DbContextOptions<MiySongDbContext> options) : base(options)
         {
         }
 
-        public MiySongDbContext()
+        public MiySongDbContext(string connectionString) : base(GetOptions(connectionString))
         {
+        }
+
+        private static DbContextOptions GetOptions(string connectionString)
+        {
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
         }
 
         public DbSet<Song> Songs { get; set; }
         public DbSet<SongRecord> SongRecords { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-              .SetBasePath(Directory.GetCurrentDirectory())
-              .AddJsonFile("dbsetting.json")
-              .Build();
-                var connectionString = configuration.GetConnectionString("DBConnection");
-                optionsBuilder.UseSqlServer(connectionString);
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

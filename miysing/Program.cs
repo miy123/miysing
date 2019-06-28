@@ -19,10 +19,10 @@ namespace miysing
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
          WebHost.CreateDefaultBuilder(args)
-         .ConfigureAppConfiguration((webHostBuilder, configurationBinder) =>
-         {
-             configurationBinder.AddJsonFile("dbsetting.json", optional: true);
-         })
+         //.ConfigureAppConfiguration((webHostBuilder, configurationBinder) =>
+         //{
+         //    configurationBinder.AddJsonFile("dbsetting.json", optional: true);
+         //})
          .UseStartup<Startup>();
     }
 }
