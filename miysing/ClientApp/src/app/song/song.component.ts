@@ -20,14 +20,12 @@ export class SongComponent implements OnInit {
 
   get filterSongs(): Song[] {
     let result = this.songs;
-    if (this.searchParameter) result = result.filter(x => x.name.includes(this.searchParameter) || x.descrption.includes(this.searchParameter) || x.songRecords.some(y => y.listener.includes(this.searchParameter)));
+    if (this.searchParameter) result = result.filter(x => x.name.includes(this.searchParameter) || (x.descrption ? x.descrption.includes(this.searchParameter) : false) || x.songRecords.some(y => y.listener.includes(this.searchParameter)));
     return result;
   }
 
   submitForm(form: Song): void {
-    console.log('Form Data: ');
-    console.log(form.descrption);
-    console.log(form.name);
+    this.create(form);
   }
   //crud
   getData(): void {
@@ -35,8 +33,8 @@ export class SongComponent implements OnInit {
       this.songs = result;
     }, error => console.error(error));
   }
-  create(): void {
-    this.http.post<Result>('/api/Song/Create', this.newSong).subscribe(result => {
+  create(form): void {
+    this.http.post<Result>('/api/Song/Create', form).subscribe(result => {
       alert(result.message);
       this.newSong = new Song();
       this.getData();
@@ -57,7 +55,7 @@ export class SongComponent implements OnInit {
       }, error => console.error(error));
     }
   }
-  
+
   onSelect(song: Song): void {
     this.selectedSong = song;
   }
