@@ -9,26 +9,30 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   templateUrl: './song.component.html'
 })
 export class SongComponent implements OnInit {
-  ngOnInit(): void {
-  }
+  searchParameter: string;
   songs: Song[];
   selectedSong: Song;
   createForm: FormGroup;
-
   displaySongs: Song[];
-  searchParameter: string = '';
+
+  ngOnInit(): void {
+  }
 
   get filterSongs(): Song[] {
     let result = this.songs;
-    if (this.searchParameter) result = result.filter(x => x.name.includes(this.searchParameter) || (x.descrption ? x.descrption.includes(this.searchParameter) : false) || x.songRecords.some(y => y.listener.includes(this.searchParameter)));
+    if (this.searchParameter) {
+      result = result.filter(x => x.name.includes(this.searchParameter)
+        || (x.descrption ? x.descrption.includes(this.searchParameter) : false)
+        || x.songRecords.some(y => y.listener.includes(this.searchParameter)));
+    }
     return result;
   }
 
   onSubmit(): void {
     console.log(this.createForm);
-    if (this.createForm.valid === true) this.create(this.createForm.value);
+    if (this.createForm.valid === true) { this.create(this.createForm.value); }
   }
-  //crud
+  // crud
   getData(): void {
     this.http.get<Song[]>('/api/Song/GetSongsList').subscribe(result => {
       this.songs = result;
@@ -47,7 +51,7 @@ export class SongComponent implements OnInit {
         alert(result.message);
         song.editable = !result.success;
       }, error => console.error(error));
-    } else alert('請輸入必填項.');
+    } else { alert('請輸入必填項.'); }
   }
   delete(song: Song): void {
     if (confirm('是否刪除？')) {
@@ -72,7 +76,7 @@ export class SongComponent implements OnInit {
     this.createForm = this.fb.group({
       name: new FormControl('', [
         Validators.required,
-        //Validators.minLength(4)
+        // Validators.minLength(4)
       ]),
       descrption: new FormControl('', Validators.required)
     });

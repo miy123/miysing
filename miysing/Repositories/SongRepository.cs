@@ -7,8 +7,6 @@ namespace miysing.Repositories
 {
     public class SongRepository : Repository<Song>, ISongRepository
     {
-        private List<Song> _songs;
-
         public SongRepository(MiySongDbContext context) : base(context)
         {
         }

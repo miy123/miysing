@@ -12,8 +12,11 @@ namespace miysing.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { set; get; }
+
         public string Name { set; get; }
+
         public string Descrption { set; get; }  
+
         public virtual ICollection<SongRecord> SongRecords { set; get; }
 
         public Song()
