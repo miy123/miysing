@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miysing", "miysing\miysing.csproj", "{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "miysing.Web", "miysing\miysing.Web.csproj", "{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miysing.Repository", "miysing.Repository\miysing.Repository.csproj", "{4689A4FC-8063-42FE-B3BF-B409DBCABF42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miysing.Helper", "miysing.Helper\miysing.Helper.csproj", "{2CE9CB0A-8072-4DB0-AAF3-A8791E409B3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E6C64D4-21FD-4644-B2F6-9D32E5C50C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4689A4FC-8063-42FE-B3BF-B409DBCABF42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4689A4FC-8063-42FE-B3BF-B409DBCABF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4689A4FC-8063-42FE-B3BF-B409DBCABF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4689A4FC-8063-42FE-B3BF-B409DBCABF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CE9CB0A-8072-4DB0-AAF3-A8791E409B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CE9CB0A-8072-4DB0-AAF3-A8791E409B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CE9CB0A-8072-4DB0-AAF3-A8791E409B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CE9CB0A-8072-4DB0-AAF3-A8791E409B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

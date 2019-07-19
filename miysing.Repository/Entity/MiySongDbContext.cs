@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.IO;
 
-namespace miysing.Models
+namespace miysing.Repository
 {
     public class MiySongDbContext : DbContext
     {

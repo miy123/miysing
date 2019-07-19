@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using miysing.Models;
-using miysing.Repositories.Interface;
-using miysing.ViewModels;
+using miysing.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace miysing.Repositories
+namespace miysing.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

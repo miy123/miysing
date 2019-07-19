@@ -1,9 +1,7 @@
-﻿using miysing.Repositories.Interface;
-using miysing.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace miysing.Repositories
+namespace miysing.Repository
 {
     public class SongRepository : Repository<Song>, ISongRepository
     {

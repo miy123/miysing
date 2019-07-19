@@ -5,23 +5,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace miysing.Models
+namespace miysing.Repository
 {
-    public class Song: BaseField
+    public class SongRecord : BaseField
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { set; get; }
+        [ForeignKey("Song")]
+        public int SongId { set; get; }
+        public DateTime Time { set; get; }
+        public string Listener { set; get; }
+        public string SongUrl { set; get; }
 
-        public string Name { set; get; }
-
-        public string Descrption { set; get; }  
-
-        public virtual ICollection<SongRecord> SongRecords { set; get; }
-
-        public Song()
-        {
-            this.SongRecords = new List<SongRecord>();
-        }
+        public virtual Song Song { set; get; }
     }
 }

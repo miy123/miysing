@@ -7,6 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using miysing.Models;
+using System.Reflection;
+using System.Linq;
+using miysing.Repository;
+using miysing.Helper;
+using System;
+using System.Collections.Generic;
 
 namespace miysing
 {
@@ -31,6 +37,20 @@ namespace miysing
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            var assemblies = new List<Assembly>();
+            Assembly.GetExecutingAssembly()
+                .GetReferencedAssemblies()
+                .ToList()
+                .ForEach(x => assemblies.Add(Assembly.Load(x)));
+            assemblies
+            .SelectMany(x => x.GetExportedTypes().Where(y => typeof(ITypeRegistrar).IsAssignableFrom(y) && !y.IsInterface))
+            .Select(p => (ITypeRegistrar)Activator.CreateInstance(p))
+            .ToList()
+            .ForEach(x =>
+            {
+                x.RegisterTypes(services);
             });
         }
 

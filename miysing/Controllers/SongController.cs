@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using miysing.Models;
+using miysing.Repository;
 
 namespace miysing.Controllers
 {
     [Route("api/[controller]")]
     public class SongController : BaseController
     {
-        public SongController(MiySongDbContext context) : base(context)
+        private readonly ISongRepository _songRepository;
+
+        public SongController(ISongRepository songRepository)
         {
+            this._songRepository = songRepository;
         }
 
         public IActionResult Index()
@@ -22,25 +22,25 @@ namespace miysing.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Song> GetSongsList()
         {
-            return Db.Song.GetAllList();
+            return this._songRepository.GetAllList();
         }
 
         [HttpPost("[action]")]
         public IActionResult Create([FromBody]Song song)
         {
-            return Json(Db.Song.Add(song));
+            return Json(this._songRepository.Add(song));
         }
 
         [HttpPut("[action]")]
         public IActionResult Update([FromBody]Song song)
         {
-            return Json(Db.Song.Update(song));
+            return Json(this._songRepository.Update(song));
         }
 
         [HttpDelete("[action]/{id}")]
         public IActionResult Delete(int id)
         {
-            return Json(Db.Song.Remove(Db.Song.Get(id)));
+            return Json(this._songRepository.Remove(this._songRepository.Get(id)));
         }
     }
 }
