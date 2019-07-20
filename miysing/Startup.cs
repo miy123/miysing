@@ -32,7 +32,7 @@ namespace miysing.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.RegisterType();
+            services.RegistType();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

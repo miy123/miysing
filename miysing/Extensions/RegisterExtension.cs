@@ -12,7 +12,7 @@ namespace miysing.Web
         /// 註冊所有ITypeRegistrar中的介面實作
         /// </summary>
         /// <param name="services">Ioc容器</param>
-        public static void RegisterType(this IServiceCollection services)
+        public static void RegistType(this IServiceCollection services)
         {
             Assembly.GetExecutingAssembly()
                 .GetReferencedAssemblyList()
