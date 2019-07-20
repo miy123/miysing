@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace miysing.Helper
 {
-    public static class AssignableExtensions
+    public static class TypeExtensions
     {
         /// <summary>
         /// Determines whether the genericType is assignable from givenType taking into account

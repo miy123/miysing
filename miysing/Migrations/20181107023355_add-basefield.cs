@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace miysing.Migrations
+namespace miysing.Web.Migrations
 {
     public partial class addbasefield : Migration
     {

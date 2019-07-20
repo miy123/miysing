@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using miysing.Repository;
 
-namespace miysing.Controllers
+namespace miysing.Web.Controllers
 {
     [Route("api/[controller]")]
     public class SongController : BaseController

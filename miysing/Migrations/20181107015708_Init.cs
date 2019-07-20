@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace miysing.Migrations
+namespace miysing.Web.Migrations
 {
     public partial class Init : Migration
     {

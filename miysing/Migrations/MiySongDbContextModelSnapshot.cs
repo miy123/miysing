@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using miysing.Repository;
 
-namespace miysing.Migrations
+namespace miysing.Web.Migrations
 {
     [DbContext(typeof(MiySongDbContext))]
     partial class MiySongDbContextModelSnapshot : ModelSnapshot
