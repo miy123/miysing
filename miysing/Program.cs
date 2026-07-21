@@ -1,28 +1,48 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using miysing.Repository;
+using miysing.Web;
 
-namespace miysing.Web
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MiySongDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+
+// In production, the Angular files will be served from this directory
+builder.Services.AddSpaStaticFiles(configuration =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+    configuration.RootPath = "ClientApp/dist/browser";
+});
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-         WebHost.CreateDefaultBuilder(args)
-         //.ConfigureAppConfiguration((webHostBuilder, configurationBinder) =>
-         //{
-         //    configurationBinder.AddJsonFile("dbsetting.json", optional: true);
-         //})
-         .UseStartup<Startup>();
-    }
+builder.Services.RegistType();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseSpaStaticFiles();
+
+app.UseRouting();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+
+app.UseSpa(spa =>
+{
+    spa.Options.SourcePath = "ClientApp";
+});
+
+app.Run();

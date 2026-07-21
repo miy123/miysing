@@ -1,5 +1,5 @@
 export class Result {
-  success: boolean
-  message: string
-  exceptionString: string
+  success!: boolean
+  message!: string
+  exceptionString!: string
 }

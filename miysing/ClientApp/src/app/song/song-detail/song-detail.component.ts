@@ -5,17 +5,18 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-song-detail',
-  templateUrl: './song-detail.component.html'
+  templateUrl: './song-detail.component.html',
+  standalone: false
 })
 export class SongDetailComponent implements OnInit {
-  @Input() song: Song;
+  @Input() song: Song | null = null;
 
   createRaw: SongRecord[] = [];
   http: HttpClient;
 
   addRaw(): void {
     const newRecord = new SongRecord();
-    newRecord.songId = this.song.id;
+    newRecord.songId = this.song!.id;
     this.createRaw.push(newRecord);
   }
   removeRaw(raw: SongRecord): void {
@@ -34,8 +35,8 @@ export class SongDetailComponent implements OnInit {
   }
 
   getRecord(): void {
-    this.http.get<SongRecord[]>('/api/SongRecord/GetSongRecordBySongId/' + this.song.id).subscribe(result => {
-      this.song.songRecords = result;
+    this.http.get<SongRecord[]>('/api/SongRecord/GetSongRecordBySongId/' + this.song!.id).subscribe(result => {
+      this.song!.songRecords = result;
     }, error => console.error(error));
   }
   update(songRecord: SongRecord): void {
@@ -57,7 +58,7 @@ export class SongDetailComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.song && (changes.song.previousValue && changes.song.currentValue && changes.song.currentValue.id != changes.song.previousValue.id)) {
+    if (changes['song'] && (changes['song'].previousValue && changes['song'].currentValue && changes['song'].currentValue.id != changes['song'].previousValue.id)) {
       this.createRaw = [];
     }
   }

@@ -2,17 +2,18 @@ import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/
 
 @Component({
   selector: 'app-miypagelist',
-  templateUrl: './miypagelist.component.html'
+  templateUrl: './miypagelist.component.html',
+  standalone: false
 })
 export class MiypagelistComponent {
-  @Input() allData: any[];
+  @Input() allData: any[] = [];
   @Output() displayData = new EventEmitter();
 
   maxPageButtonSize: number = 5;
   maxItemOnePage: number = 5;
   currentPage: number = 1;
   minPage: number = 1;
-  pageSize: number;
+  pageSize: number = 0;
   option: Option = new Option();
 
   setPageSize(): void {
@@ -85,7 +86,7 @@ export class MiypagelistComponent {
   ngOnChanges(changes: SimpleChanges) {
     let vm = this;
     setTimeout(() => {
-      if (changes.allData && (!changes.allData.previousValue || !vm.isObjEqual(changes.allData.currentValue, changes.allData.previousValue))) {
+      if (changes['allData'] && (!changes['allData'].previousValue || !vm.isObjEqual(changes['allData'].currentValue, changes['allData'].previousValue))) {
         vm.resetPage();
         vm.setComputedProperty();
         vm.getDisplayData();
@@ -93,7 +94,7 @@ export class MiypagelistComponent {
     }, 0);
   }
 
-  isObjEqual(o1, o2): boolean {
+  isObjEqual(o1: any, o2: any): boolean {
     var props1 = Object.getOwnPropertyNames(o1);
     var props2 = Object.getOwnPropertyNames(o2);
     if (props1.length != props2.length) {

@@ -6,14 +6,15 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-song',
-  templateUrl: './song.component.html'
+  templateUrl: './song.component.html',
+  standalone: false
 })
 export class SongComponent implements OnInit {
-  searchParameter: string;
-  songs: Song[];
-  selectedSong: Song;
-  createForm: FormGroup;
-  displaySongs: Song[];
+  searchParameter!: string;
+  songs!: Song[];
+  selectedSong: Song | null = null;
+  createForm!: FormGroup;
+  displaySongs!: Song[];
 
   ngOnInit(): void {
   }
@@ -38,7 +39,7 @@ export class SongComponent implements OnInit {
       this.songs = result;
     }, error => console.error(error));
   }
-  create(form): void {
+  create(form: any): void {
     this.http.post<Result>('/api/Song/Create', form).subscribe(result => {
       alert(result.message);
       this.getData();
@@ -62,7 +63,7 @@ export class SongComponent implements OnInit {
     }
   }
   close() {
-    document.getElementById('closeModal').click();
+    document.getElementById('closeModal')!.click();
     this.createForm.reset();
   }
   onSelect(song: Song): void {
